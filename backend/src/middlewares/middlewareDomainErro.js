@@ -1,5 +1,9 @@
-const erroDomain = (err, _req, res, _next) => {
-   res.status(err.status).json({ message: err.message });
+const erroDomain = (err, req, res, next) => {
+    console.error(err);
+    const statusCode = err.status || 500;
+    const message = err.message || "Internal Server Error";
+
+    res.status(statusCode).json({ message });
 };
 
 module.exports = erroDomain;

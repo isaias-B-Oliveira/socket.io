@@ -1,15 +1,12 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 const payloadUser = (req, _res, next) => {
+    const { authorization } = req.headers;
 
-  const { authorization } = req.headers;
+    const decode = jwt.decode(authorization, { complete: true });
 
-  const decode = jwt.decode(authorization, {complete: true });
-
-  req.body.idUser = decode.payload.id;
-
-  next()
-
-}
+    decode ? decode.payload : null;
+    next();
+};
 
 module.exports = payloadUser;
