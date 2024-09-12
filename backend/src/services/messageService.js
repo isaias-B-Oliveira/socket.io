@@ -1,12 +1,24 @@
-const model = require('../models/messageModel');
+const connection = require("../models/connection");
 
-const addMessage = async (message) => {
-  await model.addMessage(message);
+const getMessageByForeignKey = async (channelId) => {
+    const query = "SELECT * FROM chatTime.menssage WHERE chanel_id = ?";
+    const [rows] = await connection.execute(query, [channelId]);
+    return rows;
 };
 
-const getMessageByForeignKey = async (id) => {
-  const msg = await model.getMessageByForeignKey(id);
-  return msg;
-}
+const updateMessage = async (id, message) => {
+    const sql = "UPDATE chatTime.menssage SET message = ? WHERE id = ?";
 
-module.exports = { addMessage, getMessageByForeignKey };
+    // Certifique-se de que `message` e `id` estão definidos
+    if (!message || !id) {
+        throw new Error("Message or ID is missing");
+    }
+
+    // Execute a query apenas com os valores definidos
+    await connection.execute(sql, [message, id]);
+};
+
+module.exports = {
+    updateMessage,
+    getMessageByForeignKey,
+};
