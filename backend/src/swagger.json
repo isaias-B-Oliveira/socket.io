@@ -365,8 +365,78 @@
         "200": {
           "description": "OK"
         }
+
        }
       }
-    }
-  }
+
+    },
+    
+        "/messages/{id}": {
+          "put": {
+            "summary": "Atualiza uma mensagem existente",
+            "description": "Esta rota permite atualizar uma mensagem existente no canal.",
+            "tags": ["messages"],
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID da mensagem a ser atualizada",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Conteúdo da mensagem atualizado"
+                      }
+                    },
+                    "required": ["message"]
+                  },
+                  "examples": {
+                    "example-1": {
+                      "value": {
+                        "message": "Nova mensagem atualizada"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Mensagem atualizada com sucesso",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Requisição inválida"
+              },
+              "404": {
+                "description": "Mensagem não encontrada"
+              }
+            }
+          }
+        }
+
+  } 
+
 }
