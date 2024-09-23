@@ -1,6 +1,6 @@
 module.exports = (schema, object) => {
-  const { error } = schema.validate(object);
-  if (error) {
-    throw error;
-  }
+    const { error } = schema.validate(object);
+    if (error) {
+        throw error;
+    }
 };

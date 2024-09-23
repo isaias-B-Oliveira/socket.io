@@ -14,5 +14,11 @@ const updateMessage = async (messageId, newMessage) => {
     const sql = "UPDATE chatTime.menssage SET message = ? WHERE id = ?";
     await connection.execute(sql, [newMessage, messageId]);
 };
+const addMessage = async (messageData) => {
+    const { message, userId, channelId } = messageData;
+    const sql =
+        "INSERT INTO chatTime.menssage (message, user_id, chanel_id) VALUE (?, ?, ?)";
+    await connection.execute(sql, [message, userId, channelId]);
+};
 
-module.exports = { getMessageByForeignKey, updateMessage };
+module.exports = { getMessageByForeignKey, updateMessage, addMessage };

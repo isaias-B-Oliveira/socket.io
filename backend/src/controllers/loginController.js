@@ -1,17 +1,17 @@
-const model = require('../services/userService');
-const loginSchema = require('../schemas/loginSchema');
-const validateReq = require('../error/joiError');
+const model = require("../services/userService");
+const loginSchema = require("../schemas/loginSchema");
+const validateReq = require("../error/joiError");
 
 const login = async (req, _res, next) => {
-  const dateUser = req.body;
+    const dateUser = req.body;
 
-  validateReq(loginSchema, dateUser);
+    validateReq(loginSchema, dateUser);
 
-  const user = await model.login(dateUser);
+    const user = await model.login(dateUser);
 
-  req.body = user;
+    req.body = user;
 
-  next();
+    next();
 };
 
 module.exports = { login };

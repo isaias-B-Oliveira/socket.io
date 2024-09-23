@@ -1,6 +1,6 @@
-const Joi = require('joi');
+const Joi = require("joi");
 
 module.exports = Joi.object({
- idUser: Joi.required(),
- idChannel: Joi.required(),
+    idUser: Joi.required(),
+    idChannel: Joi.required(),
 });

@@ -1,5 +1,5 @@
-const Joi = require('joi');
+const Joi = require("joi");
 
 module.exports = Joi.object({
-  authorization: Joi.required(),
+    authorization: Joi.required(),
 });
