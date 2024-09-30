@@ -1,19 +1,21 @@
-const chanel = require('express').Router();
-const rescue = require('express-rescue');
-const controller = require('../controllers/chanelController');
-const auth = require('../middlewares/auth');
+const chanel = require("express").Router();
+const rescue = require("express-rescue");
+const controller = require("../controllers/chanelController");
+const auth = require("../middlewares/auth");
+
+chanel.get("/", rescue(auth), rescue(controller.getChanels));
 
 chanel.get(
-  '/',
-  rescue(auth),
-  rescue(controller.getChanels)
-  );
+    "/messages/:id",
+    rescue(auth),
+    controller.verifySubscribe,
+    controller.getMessagesChannel
+);
 
-chanel.get(
- '/messages/:id',
- rescue(auth),
- controller.verifySubscribe,
- controller.getMessagesChannel,
- );
+chanel.delete(
+    "/messages/:messageId",
+    rescue(auth),
+    rescue(controller.deleteMessage)
+);
 
 module.exports = chanel;
